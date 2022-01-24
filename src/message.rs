@@ -111,10 +111,16 @@ impl Messager {
 
 	/// generate commit message.
 	pub fn build(&self) -> String {
+		// let header = if self.scope.trim().len() == 0 {
+		// 	format!("{}: {}", self.typ, self.subject)
+		// } else {
+		// 	format!("{}({}): {}", self.typ, self.scope, self.subject)
+		// };
+
 		let header = if self.scope.trim().len() == 0 {
-			format!("{}: {}", self.typ, self.subject)
+			format!("{}{}: {}", self.emoji, self.typ, self.subject)
 		} else {
-			format!("{}({}): {}", self.typ, self.scope, self.subject)
+			format!("{}{}({}): {}", self.emoji, self.typ, self.scope, self.subject)
 		};
 
 		if self.body.trim().len() == 0 {
@@ -203,9 +209,9 @@ impl Messager {
 			.interact()
 			.unwrap();
 
-		if !self.emoji.is_empty() {
-			self.subject = format!("{} {}", self.emoji, self.subject)
-		}
+		// if !self.emoji.is_empty() {
+		// 	self.subject = format!("{} {}", self.emoji, self.subject)
+		// }
 	}
 
 	/// description of commit message.
